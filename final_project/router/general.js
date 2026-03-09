@@ -1,9 +1,10 @@
 const express = require('express');
+const axios = require("axios");
 let books = require("./booksdb.js");
-let isValid = require("./auth_users.js").isValid;
-let users = require("./auth_users.js").users;
-const public_users = express.Router();
+let isValid = require("./auth_users.js");
+let users = require("./auth_users.js");
 
+const public_users = express.Router();
 
 public_users.post("/register", (req,res) => {
   const username = req.body.username;
@@ -61,4 +62,8 @@ public_users.get('/review/:isbn',function (req, res) {
   return res.status(300).send(JSON.stringify(books[isbn]["reviews"]));
 });
 
+axios.get("/").then((response) => console.log(response));
+axios.get("/isbn/2").then((response) => console.log(response));
+axios.get("/author/Unknown").then((response) => console.log(response));
+axios.get("/title/One-Thousand-and-One-Nights").then((response) => console.log(response));
 module.exports.general = public_users;
