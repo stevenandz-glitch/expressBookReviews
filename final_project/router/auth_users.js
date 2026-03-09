@@ -25,8 +25,8 @@ regd_users.post("/login", (req,res) => {
   }
 
   if (authenticatedUser(username, password)) {
-    let accessToken = jwt.sign({data: password}, "access", {expiresIn: 60*60});
-    req.session.authorization = {accessToken};
+    let accessToken = jwt.sign({data: password}, "fingerprint_customer", {expiresIn: 60*60});
+    req.session.authorization = {accessToken, username};
     return res.status(200).send({message: "User successfully logged in"});
 
   } else {
@@ -36,15 +36,16 @@ regd_users.post("/login", (req,res) => {
 
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
+  const user = req.session.authorization["username"];
   const isbn = req.params.isbn;
   const review = req.query.review.split("-").join(" ");
-  books[isbn]["review"][req.user] = review;
-
+  books[isbn]["reviews"][user] = review;
   return res.status(300).json({message: "Successfully Added"});
 });
 
 regd_users.delete("/auth/review/:isbn", (req, res) => {
   const isbn = req.params.isbn;
+  
 });
 
 module.exports.authenticated = regd_users;
