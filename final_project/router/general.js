@@ -21,6 +21,43 @@ public_users.post("/register", (req,res) => {
 });
 
 // Get the book list available in the shop
+
+async function getBooks() {
+  try {
+    const response = await axios.get("http://localhost:5000/");
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function getBookbyISB(number) {
+  try {
+    const response = await axios.get(`http://localhost:5000/isbn/${number}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function getBookbyAuthor(author) {
+  try {
+    const response = await axios.get(`http://localhost:5000/author/${author}`);
+    return response;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+async function getBookbyTitle(title) {
+  try {
+    const response = await axios.get(`http://localhost:5000/title/${title}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 public_users.get('/',function (req, res) {
   return res.status(300).send(JSON.stringify(books, null, 4));
 });
