@@ -25,7 +25,7 @@ public_users.post("/register", (req,res) => {
 async function getBooks() {
   try {
     const response = await axios.get("http://localhost:5000/");
-    return response;
+    return JSON.stringify({message: "success", data: response});
   } catch (error) {
     return JSON.stringify({message: error});
   }
@@ -59,13 +59,13 @@ async function getBookbyTitle(title) {
 }
 
 public_users.get('/',function (req, res) {
-  return res.status(300).send(JSON.stringify(books, null, 4));
+  return res.status(200).send(JSON.stringify(books, null, 4));
 });
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   const isbn = req.params.isbn;
-  return res.status(300).send(JSON.stringify(books[isbn], null, 4));
+  return res.status(200).send(JSON.stringify(books[isbn], null, 4));
  });
   
 // Get book details based on author
@@ -77,7 +77,7 @@ public_users.get('/author/:author',function (req, res) {
       author_books.push(books[i + 1]);
     }
   }
-  return res.status(300).send(JSON.stringify(author_books, null, 4));
+  return res.status(200).send(JSON.stringify(author_books, null, 4));
 });
 
 // Get all books based on title
@@ -90,13 +90,13 @@ public_users.get('/title/:title',function (req, res) {
       title_books.push(books[i + 1]);
     }
   }
-  return res.status(300).send(JSON.stringify(title_books, null, 4));
+  return res.status(200).send(JSON.stringify(title_books, null, 4));
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   const isbn = req.params.isbn;
-  return res.status(300).send(JSON.stringify(books[isbn]["reviews"]));
+  return res.status(200).send(JSON.stringify(books[isbn]["reviews"]));
 });
 
 module.exports.general = public_users;
