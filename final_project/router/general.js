@@ -27,7 +27,7 @@ async function getBooks() {
     const response = await axios.get("http://localhost:5000/");
     return response;
   } catch (error) {
-    console.error(error);
+    return JSON.stringify({message: error});
   }
 }
 
@@ -36,7 +36,7 @@ async function getBookbyISB(number) {
     const response = await axios.get(`http://localhost:5000/isbn/${number}`);
     return response;
   } catch (error) {
-    console.error(error);
+    return JSON.stringify({message: error})
   }
 }
 
@@ -45,7 +45,7 @@ async function getBookbyAuthor(author) {
     const response = await axios.get(`http://localhost:5000/author/${author}`);
     return response;
   } catch (error) {
-    console.error(error)
+    return JSON.stringify({message: error});
   }
 }
 
@@ -54,7 +54,7 @@ async function getBookbyTitle(title) {
     const response = await axios.get(`http://localhost:5000/title/${title}`);
     return response;
   } catch (error) {
-    console.error(error);
+    return JSON.stringify({message: error});
   }
 }
 
