@@ -34,7 +34,7 @@ async function getBooks() {
 async function getBookbyISB(number) {
   try {
     const response = await axios.get(`http://localhost:5000/isbn/${number}`);
-    return response;
+    return JSON.stringify({message: "success", data: response});
   } catch (error) {
     return JSON.stringify({message: error})
   }
@@ -43,7 +43,7 @@ async function getBookbyISB(number) {
 async function getBookbyAuthor(author) {
   try {
     const response = await axios.get(`http://localhost:5000/author/${author}`);
-    return response;
+    return JSON.stringify({message: "success", data: response});
   } catch (error) {
     return JSON.stringify({message: error});
   }
@@ -52,7 +52,7 @@ async function getBookbyAuthor(author) {
 async function getBookbyTitle(title) {
   try {
     const response = await axios.get(`http://localhost:5000/title/${title}`);
-    return response;
+    return JSON.stringify({message: "success", data: response});
   } catch (error) {
     return JSON.stringify({message: error});
   }
@@ -99,8 +99,4 @@ public_users.get('/review/:isbn',function (req, res) {
   return res.status(300).send(JSON.stringify(books[isbn]["reviews"]));
 });
 
-axios.get("/").then((response) => console.log(response));
-axios.get("/isbn/2").then((response) => console.log(response));
-axios.get("/author/Unknown").then((response) => console.log(response));
-axios.get("/title/One-Thousand-and-One-Nights").then((response) => console.log(response));
 module.exports.general = public_users;
