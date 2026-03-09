@@ -25,7 +25,7 @@ public_users.post("/register", (req,res) => {
 async function getBooks() {
   try {
     const response = await axios.get("http://localhost:5000/");
-    return JSON.stringify({message: "success", data: response});
+    return JSON.stringify({message: "success", data: response.data});
   } catch (error) {
     return JSON.stringify({message: error});
   }
@@ -34,7 +34,7 @@ async function getBooks() {
 async function getBookbyISB(number) {
   try {
     const response = await axios.get(`http://localhost:5000/isbn/${number}`);
-    return JSON.stringify({message: "success", data: response});
+    return JSON.stringify({message: "success", data: response.data});
   } catch (error) {
     return JSON.stringify({message: error})
   }
@@ -43,7 +43,7 @@ async function getBookbyISB(number) {
 async function getBookbyAuthor(author) {
   try {
     const response = await axios.get(`http://localhost:5000/author/${author}`);
-    return JSON.stringify({message: "success", data: response});
+    return JSON.stringify({message: "success", data: response.data});
   } catch (error) {
     return JSON.stringify({message: error});
   }
@@ -52,7 +52,7 @@ async function getBookbyAuthor(author) {
 async function getBookbyTitle(title) {
   try {
     const response = await axios.get(`http://localhost:5000/title/${title}`);
-    return JSON.stringify({message: "success", data: response});
+    return JSON.stringify({message: "success", data: response.data});
   } catch (error) {
     return JSON.stringify({message: error});
   }
